@@ -1,0 +1,1912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Andrei OPRESCU — Technical Manager</title>
+  <!-- REPLACE: Update meta description and OG tags if needed -->
+  <meta name="description" content="Andrei OPRESCU — Technical Manager specializing in Automotive, Robotics, Lean Manufacturing and Industry 4.0." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <style>
+    /* =============================================
+       CSS VARIABLES & RESET
+    ============================================= */
+    :root {
+      --bg:        #0a0d14;
+      --bg2:       #0e1320;
+      --bg3:       #131928;
+      --navy:      #111827;
+      --cyan:      #00d4ff;
+      --cyan-dim:  #00aacc;
+      --orange:    #ff6b2b;
+      --orange-dim:#cc5520;
+      --text:      #e2e8f0;
+      --text-muted:#7f8ea3;
+      --border:    rgba(0,212,255,0.12);
+      --glow:      0 0 30px rgba(0,212,255,0.15);
+      --mono:      'JetBrains Mono', monospace;
+      --sans:      'Sora', sans-serif;
+      --radius:    8px;
+      --section-pad: 100px 0;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    img { max-width: 100%; display: block; }
+
+    /* =============================================
+       BLUEPRINT GRID OVERLAY
+    ============================================= */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,212,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,255,0.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,212,255,0.04) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* =============================================
+       SCROLL REVEAL
+    ============================================= */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* =============================================
+       NAVIGATION
+    ============================================= */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(10,13,20,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      height: 64px;
+      display: flex;
+      align-items: center;
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--cyan);
+      letter-spacing: 0.08em;
+    }
+    .nav-logo span { color: var(--orange); }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--cyan); }
+    .nav-links .nav-cta {
+      padding: 6px 16px;
+      border: 1px solid var(--cyan);
+      border-radius: 4px;
+      color: var(--cyan);
+    }
+    .nav-links .nav-cta:hover {
+      background: var(--cyan);
+      color: var(--bg);
+    }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text);
+      transition: all 0.3s;
+    }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 64px; left: 0; right: 0;
+      background: rgba(10,13,20,0.97);
+      border-bottom: 1px solid var(--border);
+      flex-direction: column;
+      padding: 20px 28px;
+      gap: 16px;
+      z-index: 999;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .mobile-menu a:hover { color: var(--cyan); }
+
+    /* =============================================
+       SECTION LABELS
+    ============================================= */
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 12px;
+    }
+    .section-label::before {
+      content: '// ';
+      color: var(--text-muted);
+    }
+    .section-title {
+      font-family: var(--sans);
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 48px;
+    }
+    .section-title span { color: var(--cyan); }
+
+    /* =============================================
+       HERO
+    ============================================= */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 64px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg-accent {
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(255,107,43,0.07) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-bg-accent2 {
+      position: absolute;
+      bottom: -100px; left: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0,212,255,0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 60px;
+      align-items: center;
+      padding: 80px 0 60px;
+    }
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 32px;
+      height: 1px;
+      background: var(--cyan);
+    }
+    .hero-name {
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 700;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .hero-name .last { color: var(--orange); }
+    .hero-title {
+      font-family: var(--mono);
+      font-size: clamp(0.95rem, 2vw, 1.15rem);
+      color: var(--cyan);
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      margin-bottom: 24px;
+    }
+    .hero-tagline {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--text-muted);
+      font-weight: 300;
+      max-width: 540px;
+      margin-bottom: 40px;
+      line-height: 1.6;
+    }
+    .hero-tagline strong { color: var(--text); font-weight: 500; }
+    .hero-location {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .hero-location i { color: var(--orange); }
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 28px;
+      border-radius: var(--radius);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.25s;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--orange);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: var(--orange-dim);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(255,107,43,0.35);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--cyan);
+      color: var(--cyan);
+    }
+    .btn-outline:hover {
+      background: rgba(0,212,255,0.08);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(0,212,255,0.15);
+    }
+    /* Hero photo */
+    .hero-photo-wrap {
+      position: relative;
+      flex-shrink: 0;
+    }
+    .hero-photo-frame {
+      width: 240px;
+      height: 240px;
+      border-radius: 16px;
+      background: var(--bg3);
+      border: 2px solid var(--border);
+      overflow: hidden;
+      position: relative;
+    }
+    .hero-photo-frame::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, var(--cyan), var(--orange));
+      z-index: -1;
+    }
+    /* REPLACE: Add your photo as src below */
+    .hero-photo-frame img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+    .hero-photo-placeholder {
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: var(--text-muted);
+    }
+    .hero-photo-placeholder i { font-size: 3rem; color: var(--border); }
+    .hero-photo-placeholder span {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      text-align: center;
+      letter-spacing: 0.05em;
+    }
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      margin-top: 56px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .stat {
+      background: var(--bg2);
+      padding: 20px 16px;
+      text-align: center;
+    }
+    .stat-num {
+      font-family: var(--mono);
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--cyan);
+      display: block;
+    }
+    .stat-label {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 4px;
+      display: block;
+    }
+
+    /* =============================================
+       ABOUT
+    ============================================= */
+    #about { padding: var(--section-pad); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+    .about-text p {
+      color: var(--text-muted);
+      font-size: 1.02rem;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+    .about-text p strong { color: var(--text); font-weight: 500; }
+    .about-highlights {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .highlight-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+    .highlight-card:hover {
+      border-color: rgba(0,212,255,0.3);
+      box-shadow: var(--glow);
+    }
+    .highlight-icon {
+      width: 40px; height: 40px;
+      border-radius: 8px;
+      background: rgba(0,212,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--cyan);
+      font-size: 1rem;
+    }
+    .highlight-info h4 {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .highlight-info p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* =============================================
+       EXPERIENCE
+    ============================================= */
+    #experience { padding: var(--section-pad); background: var(--bg2); }
+    .timeline {
+      position: relative;
+      padding-left: 32px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 8px; bottom: 8px;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--cyan), var(--orange), transparent);
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--border);
+    }
+    .timeline-item:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    .timeline-dot {
+      position: absolute;
+      left: -38px;
+      top: 6px;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--cyan);
+      border: 2px solid var(--bg2);
+      box-shadow: 0 0 0 4px rgba(0,212,255,0.15);
+    }
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .exp-company {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 6px;
+    }
+    .exp-role {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .exp-period {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      padding: 4px 10px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .exp-bullets {
+      margin-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .exp-bullets li {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      padding-left: 20px;
+      position: relative;
+      line-height: 1.6;
+    }
+    .exp-bullets li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--cyan);
+      font-size: 0.7rem;
+      top: 4px;
+    }
+    .exp-bullets li strong { color: var(--text); font-weight: 500; }
+    .exp-tags {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.63rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      padding: 3px 10px;
+      border-radius: 4px;
+      background: rgba(0,212,255,0.06);
+      border: 1px solid rgba(0,212,255,0.15);
+      color: var(--cyan-dim);
+    }
+    .tag.orange {
+      background: rgba(255,107,43,0.07);
+      border-color: rgba(255,107,43,0.2);
+      color: var(--orange);
+    }
+
+    /* =============================================
+       PROJECTS
+    ============================================= */
+    #projects { padding: var(--section-pad); }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    .project-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--cyan), var(--orange));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s ease;
+    }
+    .project-card:hover::before { transform: scaleX(1); }
+    .project-card:hover {
+      border-color: rgba(0,212,255,0.25);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4), var(--glow);
+    }
+    .project-num {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--orange);
+      letter-spacing: 0.15em;
+      margin-bottom: 12px;
+    }
+    .project-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 10px;
+      line-height: 1.35;
+    }
+    .project-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      flex: 1;
+      margin-bottom: 16px;
+    }
+    .project-role {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--cyan-dim);
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+    }
+    .project-role span { color: var(--text-muted); }
+    .project-outcome {
+      background: rgba(0,212,255,0.05);
+      border: 1px solid rgba(0,212,255,0.1);
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+    .project-outcome::before {
+      content: '→ ';
+      color: var(--cyan);
+      font-weight: 600;
+    }
+    .project-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+    }
+    .project-link {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--cyan);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.2s;
+      padding: 6px 0;
+    }
+    .project-link:hover { gap: 10px; }
+    .project-link.disabled {
+      color: var(--text-muted);
+      cursor: default;
+    }
+    /* Add more projects banner */
+    .add-projects-note {
+      margin-top: 32px;
+      padding: 20px 24px;
+      background: var(--bg2);
+      border: 1px dashed rgba(255,107,43,0.25);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .add-projects-note i { color: var(--orange); font-size: 1rem; }
+    .add-projects-note p {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .add-projects-note p span { color: var(--orange); }
+
+    /* =============================================
+       SKILLS
+    ============================================= */
+    #skills { padding: var(--section-pad); background: var(--bg2); }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    .skills-block {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+    }
+    .skills-block-title {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 24px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .skills-block-title i { color: var(--orange); }
+    .skill-bar-item {
+      margin-bottom: 18px;
+    }
+    .skill-bar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 7px;
+    }
+    .skill-bar-name {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--text);
+      letter-spacing: 0.04em;
+    }
+    .skill-bar-pct {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--cyan);
+    }
+    .skill-bar-track {
+      height: 5px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .skill-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--cyan), var(--orange));
+      width: 0;
+      transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .mgmt-skills {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .mgmt-skill {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 6px;
+      border: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .mgmt-skill:hover { border-color: var(--border); }
+    .mgmt-skill i {
+      width: 18px;
+      text-align: center;
+      color: var(--orange);
+      font-size: 0.85rem;
+    }
+    .mgmt-skill span {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      flex: 1;
+    }
+    .mgmt-dots {
+      display: flex;
+      gap: 4px;
+    }
+    .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+    }
+    .dot.active { background: var(--cyan); }
+    .tools-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .tool-chip {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 20px;
+      background: rgba(255,107,43,0.07);
+      border: 1px solid rgba(255,107,43,0.18);
+      color: var(--orange);
+      letter-spacing: 0.04em;
+      transition: all 0.2s;
+    }
+    .tool-chip:hover {
+      background: rgba(255,107,43,0.15);
+      transform: translateY(-1px);
+    }
+
+    /* =============================================
+       HOBBIES
+    ============================================= */
+    #hobbies { padding: var(--section-pad); }
+    .hobbies-intro {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin-bottom: 48px;
+      line-height: 1.8;
+    }
+    .hobbies-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .hobby-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px 22px;
+      text-align: center;
+      transition: all 0.3s;
+      cursor: default;
+    }
+    .hobby-card:hover {
+      border-color: rgba(255,107,43,0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(255,107,43,0.1);
+    }
+    .hobby-icon {
+      width: 56px; height: 56px;
+      border-radius: 14px;
+      background: rgba(255,107,43,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      font-size: 1.5rem;
+      color: var(--orange);
+      transition: transform 0.3s;
+    }
+    .hobby-card:hover .hobby-icon { transform: scale(1.1) rotate(-5deg); }
+    .hobby-name {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .hobby-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* =============================================
+       CONTACT
+    ============================================= */
+    #contact {
+      padding: var(--section-pad);
+      background: var(--bg2);
+      position: relative;
+    }
+    #contact::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 300px;
+      background: radial-gradient(ellipse 70% 50% at 50% 100%, rgba(255,107,43,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+    .contact-text p {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition: all 0.25s;
+      color: var(--text);
+    }
+    .contact-link:hover {
+      border-color: rgba(0,212,255,0.3);
+      transform: translateX(4px);
+      box-shadow: var(--glow);
+    }
+    .contact-link-icon {
+      width: 40px; height: 40px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .contact-link-icon.email { background: rgba(0,212,255,0.1); color: var(--cyan); }
+    .contact-link-icon.linkedin { background: rgba(10,102,194,0.15); color: #0a66c2; }
+    .contact-link-icon.github { background: rgba(255,255,255,0.07); color: var(--text); }
+    .contact-link-icon.cv { background: rgba(255,107,43,0.1); color: var(--orange); }
+    .contact-link-info { flex: 1; }
+    .contact-link-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      display: block;
+      margin-bottom: 2px;
+    }
+    .contact-link-value {
+      font-size: 0.9rem;
+      color: var(--text);
+      font-weight: 500;
+    }
+    .contact-link i.fa-arrow-right {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      transition: transform 0.2s;
+    }
+    .contact-link:hover i.fa-arrow-right { transform: translateX(3px); }
+    /* CV download button */
+    .cv-download-btn {
+      margin-top: 24px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: var(--orange);
+      color: #fff;
+      border-radius: var(--radius);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: all 0.25s;
+      cursor: pointer;
+      border: none;
+    }
+    .cv-download-btn:hover {
+      background: var(--orange-dim);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(255,107,43,0.35);
+    }
+    /* Right side availability card */
+    .availability-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px;
+    }
+    .availability-status {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .status-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34,197,94,0.15);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 4px rgba(34,197,94,0.15); }
+      50% { box-shadow: 0 0 0 8px rgba(34,197,94,0.05); }
+    }
+    .status-text {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: #22c55e;
+      letter-spacing: 0.08em;
+    }
+    .availability-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+    .availability-title span { color: var(--orange); }
+    .availability-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+    .availability-highlights {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .avail-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .avail-item i { color: var(--cyan); width: 16px; }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    footer {
+      padding: 28px 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+    footer p {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+    }
+    footer p span { color: var(--orange); }
+
+    /* =============================================
+       RESPONSIVE
+    ============================================= */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-photo-wrap { display: none; }
+      .hero-stats { grid-template-columns: repeat(3, 1fr); }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+    @media (max-width: 600px) {
+      :root { --section-pad: 70px 0; }
+      .hero-stats { grid-template-columns: 1fr 1fr; }
+      .stat:last-child { grid-column: 1 / -1; }
+      .hero-btns { flex-direction: column; }
+      .btn { justify-content: center; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .hobbies-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 380px) {
+      .hobbies-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION
+  ============================================================ -->
+  <nav>
+    <div class="container">
+      <div class="nav-inner">
+        <div class="nav-logo">AO<span>_</span>portfolio</div>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#hobbies">Personal</a></li>
+          <li><a href="#contact" class="nav-cta">Contact</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about" onclick="closeMobile()">About</a>
+    <a href="#experience" onclick="closeMobile()">Experience</a>
+    <a href="#projects" onclick="closeMobile()">Projects</a>
+    <a href="#skills" onclick="closeMobile()">Skills</a>
+    <a href="#hobbies" onclick="closeMobile()">Personal</a>
+    <a href="#contact" onclick="closeMobile()">Contact</a>
+  </div>
+
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
+  <section id="hero">
+    <div class="hero-bg-accent"></div>
+    <div class="hero-bg-accent2"></div>
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-content">
+          <div class="hero-eyebrow reveal">Technical Manager</div>
+          <h1 class="hero-name reveal reveal-delay-1">
+            Andrei<br>
+            <span class="last">OPRESCU</span>
+          </h1>
+          <div class="hero-title reveal reveal-delay-2">&gt; Automotive · Robotics · Industry 4.0</div>
+          <p class="hero-tagline reveal reveal-delay-2">
+            Driving <strong>operational excellence</strong> through Lean Manufacturing,
+            smart automation, and high-performance teams — delivering
+            <strong>99%+ on-time</strong> across complex production ecosystems.
+          </p>
+          <div class="hero-location reveal reveal-delay-3">
+            <i class="fa-solid fa-location-dot"></i>
+            Ploiesti, Romania
+          </div>
+          <div class="hero-btns reveal reveal-delay-3">
+            <a href="#projects" class="btn btn-primary">
+              <i class="fa-solid fa-layer-group"></i> View Projects
+            </a>
+            <a href="#contact" class="btn btn-outline">
+              <i class="fa-solid fa-paper-plane"></i> Get In Touch
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-photo-wrap reveal reveal-delay-2">
+          <div class="hero-photo-frame">
+            <img src="me.jpg" alt="Andrei OPRESCU" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats bar -->
+      <div class="hero-stats reveal">
+        <div class="stat">
+          <span class="stat-num">7+</span>
+          <span class="stat-label">Years Experience</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">99%</span>
+          <span class="stat-label">On-Time Delivery</span>
+        </div>
+        <div class="stat">
+          <!-- REPLACE: Update team size -->
+          <span class="stat-num">50+</span>
+          <span class="stat-label">Team Members Led</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ABOUT
+  ============================================================ -->
+  <section id="about">
+    <div class="container">
+      <p class="section-label reveal">about me</p>
+      <h2 class="section-title reveal">Engineer. Leader. <span>Problem-Solver.</span></h2>
+
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <p>
+            I'm a <strong>Technical Manager</strong> with over 7 years of experience
+            at the intersection of Automotive manufacturing and Robotics — where precision
+            engineering meets the constant pressure of global supply chains.
+          </p>
+          <p>
+            My work centers on <strong>transforming production systems</strong>: deploying
+            Lean Manufacturing principles, integrating Industry 4.0 technologies, and building
+            the cross-functional alignment that keeps complex operations running at peak efficiency.
+          </p>
+          <p>
+            I'm equally comfortable on the factory floor, in a stakeholder review, or
+            mentoring a team through a difficult Lean Six Sigma transition. The details matter
+            to me — and so does the big picture.
+          </p>
+          <!-- REPLACE: Add more personal context if you like -->
+        </div>
+
+        <div class="about-highlights">
+          <div class="highlight-card reveal reveal-delay-1">
+            <div class="highlight-icon"><i class="fa-solid fa-gears"></i></div>
+            <div class="highlight-info">
+              <h4>Lean Manufacturing & Six Sigma</h4>
+              <p>Certified practitioner with hands-on deployments reducing waste, cycle time, and scrap across multi-shift production environments.</p>
+            </div>
+          </div>
+          <div class="highlight-card reveal reveal-delay-2">
+            <div class="highlight-icon"><i class="fa-solid fa-robot"></i></div>
+            <div class="highlight-info">
+              <h4>Industry 4.0 Integration</h4>
+              <p>Driving automation, data connectivity, and smart manufacturing systems in Automotive and Robotics contexts.</p>
+            </div>
+          </div>
+          <div class="highlight-card reveal reveal-delay-3">
+            <div class="highlight-icon"><i class="fa-solid fa-people-group"></i></div>
+            <div class="highlight-info">
+              <h4>Cross-Functional Leadership</h4>
+              <p>Building and mentoring high-performance teams, synchronising logistics, quality, and engineering workflows end-to-end.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       EXPERIENCE
+  ============================================================ -->
+  <section id="experience">
+    <div class="container">
+      <p class="section-label reveal">career path</p>
+      <h2 class="section-title reveal">Work <span>Experience</span></h2>
+
+      <div class="timeline">
+
+        <!-- REPLACE: Update with your actual experience -->
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="exp-header">
+            <div>
+              <div class="exp-company"><!-- REPLACE: Company Name --> Company Name</div>
+              <div class="exp-role">Technical Manager</div>
+            </div>
+            <!-- REPLACE: Update years -->
+            <span class="exp-period">2021 — Present</span>
+          </div>
+          <ul class="exp-bullets">
+            <li>Directed a cross-functional team of <strong>50+ engineers and technicians</strong>, overseeing Lean transformation initiatives that reduced production cycle time by 18%.</li>
+            <li>Integrated <strong>Industry 4.0</strong> solutions (real-time OEE monitoring, predictive maintenance) across three production lines, achieving 99.2% on-time delivery KPI.</li>
+            <li>Led Lean Six Sigma deployment resulting in <strong>€X00K in annual savings</strong> — REPLACE with actual figure.</li>
+          </ul>
+          <div class="exp-tags">
+            <span class="tag">Lean Manufacturing</span>
+            <span class="tag">Industry 4.0</span>
+            <span class="tag orange">Six Sigma</span>
+            <span class="tag">Team Leadership</span>
+            <span class="tag">Automotive</span>
+          </div>
+        </div>
+
+        <!-- REPLACE: Add second role -->
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="exp-header">
+            <div>
+              <div class="exp-company"><!-- REPLACE: Company Name --> Previous Company</div>
+              <div class="exp-role"><!-- REPLACE --> Production / Operations Manager</div>
+            </div>
+            <span class="exp-period"><!-- REPLACE --> 2018 — 2021</span>
+          </div>
+          <ul class="exp-bullets">
+            <li>Managed high-volume production scheduling for an automotive supplier, synchronizing supplier deliveries and assembly sequences to maintain <strong>zero late shipments</strong> over 18 months.</li>
+            <li>Introduced a <strong>visual management system</strong> (andon boards, KPI walls) that improved team response time to process deviations by 35%.</li>
+            <li>Coached line supervisors in <strong>5S and SMED</strong> methodologies, cutting changeover times by 22%.</li>
+          </ul>
+          <div class="exp-tags">
+            <span class="tag">Production Management</span>
+            <span class="tag">5S / SMED</span>
+            <span class="tag orange">Supply Chain</span>
+            <span class="tag">Visual Management</span>
+          </div>
+        </div>
+
+        <!-- REPLACE: Add third role if needed -->
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="exp-header">
+            <div>
+              <div class="exp-company"><!-- REPLACE: Company Name --> Early Career Company</div>
+              <div class="exp-role"><!-- REPLACE --> Process / Manufacturing Engineer</div>
+            </div>
+            <span class="exp-period"><!-- REPLACE --> 2017 — 2018</span>
+          </div>
+          <ul class="exp-bullets">
+            <li>Developed and maintained <strong>process documentation</strong>, work instructions, and control plans for new product introductions in an automotive Tier 1 environment.</li>
+            <li>Participated in FMEA and control plan reviews, contributing to <strong>zero PPM defects</strong> on two successive new-model launches.</li>
+          </ul>
+          <div class="exp-tags">
+            <span class="tag">Process Engineering</span>
+            <span class="tag">FMEA</span>
+            <span class="tag orange">NPI</span>
+            <span class="tag">Quality Control</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PROJECTS
+  ============================================================ -->
+  <section id="projects">
+    <div class="container">
+      <p class="section-label reveal">featured work</p>
+      <h2 class="section-title reveal">Technical <span>Projects</span></h2>
+
+      <div class="projects-grid">
+
+        <!-- PROJECT 1 -->
+        <div class="project-card reveal">
+          <div class="project-num">PROJECT_01</div>
+          <div class="project-name">Weight Counting Tool</div>
+          <div class="project-desc">
+            Developed and deployed a weight-based counting solution for warehouse and production environments, enabling accurate component counting without manual tallying. The system uses precision scales integrated with a software interface to calculate quantities from batch weights, eliminating counting errors on small-part SKUs.
+          </div>
+          <div class="project-role">Area: <span>Warehouse / Production</span></div>
+          <div class="project-outcome">Significantly reduced counting errors and picking time for small-component stock management.</div>
+          <div class="exp-tags" style="margin-bottom:16px;">
+            <span class="tag">Warehouse</span>
+            <span class="tag orange">Production</span>
+            <span class="tag">Automation</span>
+            <span class="tag">Tooling</span>
+          </div>
+          <div class="project-footer">
+            <!-- REPLACE: Add link to project page or demo if available -->
+            <a href="#" class="project-link">
+              <i class="fa-solid fa-arrow-right"></i> View Project
+            </a>
+          </div>
+        </div>
+
+        <!-- PROJECT 2 -->
+        <div class="project-card reveal reveal-delay-1">
+          <div class="project-num">PROJECT_02</div>
+          <div class="project-name">Check and Load</div>
+          <div class="project-desc">
+            Designed and implemented a verification and loading management system for warehouse operations. The tool guides operators through structured check sequences before dispatch, enforcing correct loading order, quantity confirmation, and documentation — preventing shipment errors at the point of loading.
+          </div>
+          <div class="project-role">Area: <span>Warehouse</span></div>
+          <div class="project-outcome">Reduced loading errors and mispicks, improving outbound shipment accuracy and customer satisfaction.</div>
+          <div class="exp-tags" style="margin-bottom:16px;">
+            <span class="tag">Warehouse</span>
+            <span class="tag orange">Logistics</span>
+            <span class="tag">Quality Gate</span>
+          </div>
+          <div class="project-footer">
+            <!-- REPLACE: Add link to project page or demo if available -->
+            <a href="#" class="project-link">
+              <i class="fa-solid fa-arrow-right"></i> View Project
+            </a>
+          </div>
+        </div>
+
+        <!-- PROJECT 3 -->
+        <div class="project-card reveal reveal-delay-2">
+          <div class="project-num">PROJECT_03</div>
+          <div class="project-name">Matics — Manufacturing Execution System</div>
+          <div class="project-desc">
+            Led the deployment of Matics MES across production lines, connecting machines, operators, and management in a unified real-time data environment. The system captures live production data, tracks OEE, manages work orders, and surfaces actionable insights for shift supervisors and plant managers.
+          </div>
+          <div class="project-role">Area: <span>Production</span></div>
+          <div class="project-outcome">Enabled data-driven decision-making on the shop floor, with measurable improvements in OEE visibility and downtime response time.</div>
+          <div class="exp-tags" style="margin-bottom:16px;">
+            <span class="tag">MES</span>
+            <span class="tag orange">Industry 4.0</span>
+            <span class="tag">OEE</span>
+            <span class="tag">Production</span>
+          </div>
+          <div class="project-footer">
+            <!-- REPLACE: Add link to project page or demo if available -->
+            <a href="#" class="project-link">
+              <i class="fa-solid fa-arrow-right"></i> View Project
+            </a>
+          </div>
+        </div>
+
+        <!-- PROJECT 4 -->
+        <div class="project-card reveal reveal-delay-3">
+          <div class="project-num">PROJECT_04</div>
+          <div class="project-name">Work Instructions Digitalisation</div>
+          <div class="project-desc">
+            Replaced paper-based work instructions across operations with a digital platform, enabling version-controlled, multimedia-rich instructions accessible directly at workstations. Operators can access step-by-step visual guides, embedded videos, and quality checkpoints in real time, eliminating outdated document risks.
+          </div>
+          <div class="project-role">Area: <span>Operations</span></div>
+          <div class="project-outcome">Eliminated paper WI version mismatches, reduced onboarding time for new operators, and improved first-time-right quality rates.</div>
+          <div class="exp-tags" style="margin-bottom:16px;">
+            <span class="tag">Digitalisation</span>
+            <span class="tag orange">Operations</span>
+            <span class="tag">Quality</span>
+            <span class="tag">Knowledge Mgmt</span>
+          </div>
+          <div class="project-footer">
+            <!-- REPLACE: Add link to project page or demo if available -->
+            <a href="#" class="project-link">
+              <i class="fa-solid fa-arrow-right"></i> View Project
+            </a>
+          </div>
+        </div>
+
+        <!-- PROJECT 5 -->
+        <div class="project-card reveal">
+          <div class="project-num">PROJECT_05</div>
+          <div class="project-name">Automatic Sorting Machine — Finished Goods</div>
+          <div class="project-desc">
+            Engineered and deployed an automated sorting system for finished goods at the end of the production line. The machine reads product identifiers, classifies items by destination, variant, or customer, and routes them automatically — removing manual sorting bottlenecks from the dispatch flow.
+          </div>
+          <div class="project-role">Area: <span>Production</span></div>
+          <div class="project-outcome">Eliminated manual sorting errors, increased end-of-line throughput, and reduced labour requirements at the dispatch station.</div>
+          <div class="exp-tags" style="margin-bottom:16px;">
+            <span class="tag">Automation</span>
+            <span class="tag orange">Production</span>
+            <span class="tag">Robotics</span>
+            <span class="tag">End-of-Line</span>
+          </div>
+          <div class="project-footer">
+            <!-- REPLACE: Add link to project page or demo if available -->
+            <a href="#" class="project-link">
+              <i class="fa-solid fa-arrow-right"></i> View Project
+            </a>
+          </div>
+        </div>
+
+        <!-- PROJECT 6 -->
+        <div class="project-card reveal reveal-delay-1">
+          <div class="project-num">PROJECT_06</div>
+          <div class="project-name">Automatic Component Feeding Machine</div>
+          <div class="project-desc">
+            Designed and implemented an automated component feeding system for production lines, replacing manual material presentation to assembly stations. The machine manages buffer stocks, detects low-level alerts, and feeds components at the correct rate to match assembly takt time, supporting a pull-based flow.
+          </div>
+          <div class="project-role">Area: <span>Production</span></div>
+          <div class="project-outcome">Removed operator material-handling interruptions, improved line uptime, and reduced component presentation errors at assembly.</div>
+          <div class="exp-tags" style="margin-bottom:16px;">
+            <span class="tag">Automation</span>
+            <span class="tag orange">Production</span>
+            <span class="tag">Lean Flow</span>
+            <span class="tag">Feeding Systems</span>
+          </div>
+          <div class="project-footer">
+            <!-- REPLACE: Add link to project page or demo if available -->
+            <a href="#" class="project-link">
+              <i class="fa-solid fa-arrow-right"></i> View Project
+            </a>
+          </div>
+        </div>
+
+        <!-- PROJECT 7 -->
+        <div class="project-card reveal reveal-delay-2">
+          <div class="project-num">PROJECT_07</div>
+          <div class="project-name">RFID for Raw Materials</div>
+          <div class="project-desc">
+            Implemented an RFID-based tracking system for raw materials throughout the logistics chain, from goods-in to point-of-use on the production floor. Tags assigned at intake provide real-time location visibility, automate stock updates, and create a full material traceability trail without manual scanning.
+          </div>
+          <div class="project-role">Area: <span>Logistics</span></div>
+          <div class="project-outcome">Achieved full raw material traceability, reduced stock discrepancies, and eliminated manual goods-in scanning steps.</div>
+          <div class="exp-tags" style="margin-bottom:16px;">
+            <span class="tag">RFID</span>
+            <span class="tag orange">Logistics</span>
+            <span class="tag">Traceability</span>
+            <span class="tag">Industry 4.0</span>
+          </div>
+          <div class="project-footer">
+            <!-- REPLACE: Add link to project page or demo if available -->
+            <a href="#" class="project-link">
+              <i class="fa-solid fa-arrow-right"></i> View Project
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Note for adding future projects -->
+      <div class="add-projects-note reveal">
+        <i class="fa-solid fa-circle-plus"></i>
+        <p>
+          <span>// TO ADD MORE PROJECTS:</span> Duplicate any <code style="color:var(--cyan)">project-card</code> block above and update the content.
+          To link a project, replace <code style="color:var(--cyan)">href="#"</code> with your URL.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SKILLS
+  ============================================================ -->
+  <section id="skills">
+    <div class="container">
+      <p class="section-label reveal">capabilities</p>
+      <h2 class="section-title reveal">Skills &amp; <span>Expertise</span></h2>
+
+      <div class="skills-grid">
+
+        <!-- TECHNICAL SKILLS -->
+        <div class="skills-block reveal">
+          <div class="skills-block-title">
+            <i class="fa-solid fa-microchip"></i> Technical Skills
+          </div>
+          <!-- REPLACE: Adjust percentages to reflect your actual proficiency -->
+          <div class="skill-bar-item">
+            <div class="skill-bar-header">
+              <span class="skill-bar-name">Lean Manufacturing</span>
+              <span class="skill-bar-pct">95%</span>
+            </div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="95"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-header">
+              <span class="skill-bar-name">Lean Six Sigma</span>
+              <span class="skill-bar-pct">90%</span>
+            </div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="90"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-header">
+              <span class="skill-bar-name">Industry 4.0 / IIoT</span>
+              <span class="skill-bar-pct">82%</span>
+            </div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="82"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-header">
+              <span class="skill-bar-name">Process Engineering</span>
+              <span class="skill-bar-pct">88%</span>
+            </div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="88"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-header">
+              <span class="skill-bar-name">Supply Chain / Logistics</span>
+              <span class="skill-bar-pct">85%</span>
+            </div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="85"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-header">
+              <span class="skill-bar-name">Quality Systems (IATF)</span>
+              <span class="skill-bar-pct">80%</span>
+            </div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-pct="80"></div></div>
+          </div>
+        </div>
+
+        <!-- MANAGEMENT SKILLS -->
+        <div class="skills-block reveal reveal-delay-1">
+          <div class="skills-block-title">
+            <i class="fa-solid fa-users-gear"></i> Management Skills
+          </div>
+          <!-- REPLACE: Adjust dot levels (1–5 active dots) to reflect your self-assessment -->
+          <div class="mgmt-skills">
+            <div class="mgmt-skill">
+              <i class="fa-solid fa-chess-king"></i>
+              <span>Cross-functional Leadership</span>
+              <div class="mgmt-dots">
+                <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div>
+              </div>
+            </div>
+            <div class="mgmt-skill">
+              <i class="fa-solid fa-person-chalkboard"></i>
+              <span>Stakeholder Communication</span>
+              <div class="mgmt-dots">
+                <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot"></div>
+              </div>
+            </div>
+            <div class="mgmt-skill">
+              <i class="fa-solid fa-diagram-project"></i>
+              <span>Project Management</span>
+              <div class="mgmt-dots">
+                <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div>
+              </div>
+            </div>
+            <div class="mgmt-skill">
+              <i class="fa-solid fa-rotate"></i>
+              <span>Change Management</span>
+              <div class="mgmt-dots">
+                <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot"></div>
+              </div>
+            </div>
+            <div class="mgmt-skill">
+              <i class="fa-solid fa-graduation-cap"></i>
+              <span>Coaching & Mentoring</span>
+              <div class="mgmt-dots">
+                <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div>
+              </div>
+            </div>
+            <div class="mgmt-skill">
+              <i class="fa-solid fa-chart-line"></i>
+              <span>KPI / Performance Management</span>
+              <div class="mgmt-dots">
+                <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot"></div>
+              </div>
+            </div>
+            <div class="mgmt-skill">
+              <i class="fa-solid fa-arrows-spin"></i>
+              <span>Agile / Continuous Improvement</span>
+              <div class="mgmt-dots">
+                <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot"></div>
+              </div>
+            </div>
+            <div class="mgmt-skill">
+              <i class="fa-solid fa-scale-balanced"></i>
+              <span>Risk & Problem Solving</span>
+              <div class="mgmt-dots">
+                <div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div><div class="dot active"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TOOLS & SOFTWARE -->
+        <div class="skills-block reveal reveal-delay-2">
+          <div class="skills-block-title">
+            <i class="fa-solid fa-toolbox"></i> Tools &amp; Software
+          </div>
+          <!-- REPLACE: Update with your actual tools -->
+          <div class="tools-grid">
+            <span class="tool-chip">SAP ERP</span>
+            <span class="tool-chip">AutoCAD</span>
+            <span class="tool-chip">CATIA</span>
+            <span class="tool-chip">SolidWorks</span>
+            <span class="tool-chip">FMEA Tools</span>
+            <span class="tool-chip">MS Project</span>
+            <span class="tool-chip">Minitab</span>
+            <span class="tool-chip">Power BI</span>
+            <span class="tool-chip">Excel / VBA</span>
+            <span class="tool-chip">Jira</span>
+            <span class="tool-chip">Arena Sim.</span>
+            <span class="tool-chip">MES Systems</span>
+            <span class="tool-chip">PLC / SCADA</span>
+            <span class="tool-chip">Git / GitHub</span>
+            <!-- REPLACE: Add more tools as needed -->
+          </div>
+          <br/>
+          <div class="skills-block-title" style="margin-top:8px; margin-bottom:16px;">
+            <i class="fa-solid fa-certificate"></i> Certifications
+          </div>
+          <!-- REPLACE: Add your actual certifications -->
+          <div class="mgmt-skills">
+            <div class="mgmt-skill">
+              <i class="fa-solid fa-award"></i>
+              <span><!-- REPLACE --> Lean Six Sigma Black Belt</span>
+            </div>
+            <div class="mgmt-skill">
+              <i class="fa-solid fa-award"></i>
+              <span><!-- REPLACE --> PMP / Prince2 (add if applicable)</span>
+            </div>
+            <div class="mgmt-skill">
+              <i class="fa-solid fa-award"></i>
+              <span><!-- REPLACE --> IATF 16949 Internal Auditor</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       HOBBIES
+  ============================================================ -->
+  <section id="hobbies">
+    <div class="container">
+      <p class="section-label reveal">beyond the office</p>
+      <h2 class="section-title reveal">Interests &amp; <span>Hobbies</span></h2>
+
+      <p class="hobbies-intro reveal">
+        The same curiosity that drives me to dismantle a production problem also pulls me
+        toward hobbies that are hands-on, creative, and a little obsessive. Here's what I
+        get up to when I'm not optimising workflows.
+      </p>
+
+      <div class="hobbies-grid">
+        <!-- REPLACE: Swap out hobbies with yours. Choose an icon from Font Awesome 6 Free set. -->
+
+        <div class="hobby-card reveal">
+          <div class="hobby-icon"><i class="fa-solid fa-car"></i></div>
+          <div class="hobby-name">Auto Detailing</div>
+          <div class="hobby-desc">Ceramic coatings, paint correction, and the deeply satisfying pursuit of a flawless finish. A different kind of quality control.</div>
+        </div>
+
+        <div class="hobby-card reveal reveal-delay-1">
+          <div class="hobby-icon"><i class="fa-solid fa-cube"></i></div>
+          <div class="hobby-name">3D Modelling</div>
+          <div class="hobby-desc">Designing parts and assemblies in CAD — sometimes for work, sometimes just because an idea won't leave me alone at midnight.</div>
+        </div>
+
+        <div class="hobby-card reveal reveal-delay-2">
+          <div class="hobby-icon"><i class="fa-solid fa-mountain-sun"></i></div>
+          <div class="hobby-name">Hiking</div>
+          <div class="hobby-desc">The Carpathians are right on the doorstep. There's nothing better than a long trail to clear the head after a tough project week.</div>
+        </div>
+
+        <div class="hobby-card reveal reveal-delay-3">
+          <div class="hobby-icon"><i class="fa-solid fa-camera"></i></div>
+          <div class="hobby-name">Photography</div>
+          <div class="hobby-desc">Mostly landscapes and industrial subjects — I like how a frame forces you to see structure and light where others walk past without noticing.</div>
+        </div>
+
+        <!-- REPLACE: Add more hobbies below if needed -->
+        <div class="hobby-card reveal">
+          <div class="hobby-icon"><i class="fa-solid fa-microchip"></i></div>
+          <div class="hobby-name"><!-- REPLACE --> Electronics / DIY</div>
+          <div class="hobby-desc"><!-- REPLACE --> Tinkering with Arduino, Raspberry Pi and home automation projects. Engineering at home never really stops.</div>
+        </div>
+
+        <div class="hobby-card reveal reveal-delay-1">
+          <div class="hobby-icon"><i class="fa-solid fa-book-open"></i></div>
+          <div class="hobby-name"><!-- REPLACE --> Reading</div>
+          <div class="hobby-desc"><!-- REPLACE --> A mix of management theory, engineering history, and the occasional novel — mostly consumed on long flight delays between plants.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CONTACT
+  ============================================================ -->
+  <section id="contact">
+    <div class="container">
+      <p class="section-label reveal">get in touch</p>
+      <h2 class="section-title reveal">Let's <span>Connect</span></h2>
+
+      <div class="contact-grid">
+        <div class="contact-text reveal">
+          <p>
+            I'm always open to discussing new opportunities, challenging projects, or just
+            exchanging notes on Lean, manufacturing tech, or what it actually takes to hit
+            99% on-time delivery consistently. Drop me a message — I reply to every serious enquiry.
+          </p>
+
+          <div class="contact-links">
+
+            <!-- REPLACE: Add your actual email address -->
+            <a href="mailto:<!-- REPLACE -->andrei.oprescu@email.com" class="contact-link">
+              <div class="contact-link-icon email"><i class="fa-solid fa-envelope"></i></div>
+              <div class="contact-link-info">
+                <span class="contact-link-label">Email</span>
+                <!-- REPLACE: your email -->
+                <span class="contact-link-value">andrei.oprescu@email.com</span>
+              </div>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+            <!-- REPLACE: Add your actual LinkedIn URL -->
+            <a href="https://linkedin.com/in/<!-- REPLACE -->andreioprescu" target="_blank" rel="noopener" class="contact-link">
+              <div class="contact-link-icon linkedin"><i class="fa-brands fa-linkedin"></i></div>
+              <div class="contact-link-info">
+                <span class="contact-link-label">LinkedIn</span>
+                <!-- REPLACE: your LinkedIn handle -->
+                <span class="contact-link-value">linkedin.com/in/andreioprescu</span>
+              </div>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+            <!-- REPLACE: Add your actual GitHub URL if applicable -->
+            <a href="https://github.com/<!-- REPLACE -->andreioprescu" target="_blank" rel="noopener" class="contact-link">
+              <div class="contact-link-icon github"><i class="fa-brands fa-github"></i></div>
+              <div class="contact-link-info">
+                <span class="contact-link-label">GitHub</span>
+                <!-- REPLACE: your GitHub handle -->
+                <span class="contact-link-value">github.com/andreioprescu</span>
+              </div>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+          </div>
+
+          <!-- REPLACE: Link to your actual CV file. Add CV.pdf to your GitHub repo root. -->
+          <a href="CV.pdf" download class="cv-download-btn">
+            <i class="fa-solid fa-file-arrow-down"></i> Download CV (PDF)
+          </a>
+          <!-- NOTE: Upload your CV as "CV.pdf" in the same folder as index.html -->
+
+        </div>
+
+        <div class="availability-card reveal reveal-delay-1">
+          <div class="availability-status">
+            <div class="status-dot"></div>
+            <!-- REPLACE: Change to "Currently unavailable" and remove status-dot animation if not open -->
+            <span class="status-text">Open to opportunities</span>
+          </div>
+          <div class="availability-title">
+            Looking for the next<br><span>great challenge</span>
+          </div>
+          <p class="availability-desc">
+            <!-- REPLACE: Update this availability blurb as needed -->
+            Based in Ploiesti, Romania — open to senior management roles in Automotive,
+            Robotics, or Manufacturing sectors, including relocation or hybrid arrangements
+            for the right opportunity.
+          </p>
+          <div class="availability-highlights">
+            <div class="avail-item">
+              <i class="fa-solid fa-check"></i>
+              <span>Senior / Director-level technical roles</span>
+            </div>
+            <div class="avail-item">
+              <i class="fa-solid fa-check"></i>
+              <span>Consulting — Lean / Industry 4.0 engagements</span>
+            </div>
+            <div class="avail-item">
+              <i class="fa-solid fa-check"></i>
+              <span>Speaking / Workshop facilitation</span>
+            </div>
+            <div class="avail-item">
+              <i class="fa-solid fa-check"></i>
+              <span>Romania · Remote · Open to relocation</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer>
+    <div class="container">
+      <p>Built by <span>Andrei OPRESCU</span> · Ploiesti, Romania · <!-- REPLACE: Update year if needed --> 2025</p>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+    /* ----- Hamburger menu ----- */
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
+    function closeMobile() {
+      mobileMenu.classList.remove('open');
+    }
+
+    /* ----- Scroll reveal ----- */
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(el => observer.observe(el));
+
+    /* ----- Skill bar animation ----- */
+    const bars = document.querySelectorAll('.skill-bar-fill');
+    const barObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const pct = entry.target.getAttribute('data-pct');
+          entry.target.style.width = pct + '%';
+          barObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    bars.forEach(bar => barObserver.observe(bar));
+
+    /* ----- Active nav highlight on scroll ----- */
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(sec => {
+        const top = sec.getBoundingClientRect().top;
+        if (top < 120) current = sec.getAttribute('id');
+      });
+      navLinks.forEach(link => {
+        link.style.color = '';
+        if (link.getAttribute('href') === '#' + current) {
+          link.style.color = 'var(--cyan)';
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
